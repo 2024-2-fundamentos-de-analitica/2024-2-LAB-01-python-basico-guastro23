@@ -25,5 +25,28 @@ def pregunta_08():
      (7, ['A', 'C', 'D', 'E']),
      (8, ['A', 'B', 'D', 'E']),
      (9, ['A', 'B', 'C', 'E'])]
-
     """
+    with open("files/input/data.csv", "r", encoding="utf-8") as f:
+        lineas = f.readlines()
+
+    # Diccionario para agrupar las letras únicas asociadas a cada valor de la segunda columna
+    agrupacion = {}
+
+    for linea in lineas:
+        columnas = linea.strip().split("\t")
+        letra = columnas[0]
+        valor = int(columnas[1])
+        
+        if valor not in agrupacion:
+            agrupacion[valor] = set()  # Usamos un set para evitar duplicados
+        agrupacion[valor].add(letra)
+
+    # Convertir el diccionario en una lista de tuplas ordenadas por el valor de la segunda columna
+    resultado = []
+    for valor in sorted(agrupacion.keys()):
+        # Convertir el set en lista ordenada
+        letras_ordenadas = sorted(list(agrupacion[valor]))
+        resultado.append((valor, letras_ordenadas))
+        
+    return resultado
+

@@ -24,5 +24,25 @@ def pregunta_04():
      ('10', 2),
      ('11', 2),
      ('12', 3)]
-
     """
+    with open("files/input/data.csv", "r", encoding="utf-8") as f:
+        lineas = f.readlines()
+
+    conteo_meses = {}
+
+    for linea in lineas:
+        columnas = linea.strip().split("\t")
+        # Extrae la fecha en formato YYYY-MM-DD (columna 3, índice 2)
+        fecha = columnas[2]
+        # Extrae el mes, ya que el mes está en los caracteres 6 y 7
+        mes = fecha[5:7]
+        
+        if mes not in conteo_meses:
+            conteo_meses[mes] = 0
+        conteo_meses[mes] += 1
+
+    # Ordena alfabéticamente por el mes (siendo cadenas '01', '02', etc.)
+    resultado = sorted(conteo_meses.items(), key=lambda x: x[0])
+    
+    return resultado
+

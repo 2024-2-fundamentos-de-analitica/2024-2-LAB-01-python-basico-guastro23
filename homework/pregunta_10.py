@@ -17,6 +17,19 @@ def pregunta_10():
      ...
      ('E', 2, 3),
      ('E', 3, 3)]
-
-
     """
+    with open("files/input/data.csv", "r", encoding="utf-8") as f:
+        lineas = f.readlines()
+        
+    resultado = []
+    for linea in lineas:
+        columnas = linea.strip().split("\t")
+        letra = columnas[0]
+        # La columna 4 es la cuarta columna (índice 3) que contiene elementos separados por coma
+        elementos_col4 = columnas[3].split(",")
+        # La columna 5 es la quinta columna (índice 4) que contiene pares clave:valor separados por coma
+        elementos_col5 = columnas[4].split(",")
+        resultado.append((letra, len(elementos_col4), len(elementos_col5)))
+        
+    return resultado
+

@@ -7,10 +7,26 @@ utilizar pandas, numpy o scipy.
 
 
 def pregunta_01():
-    """
+     
+
+     with open("files/input/data.csv", "r", encoding="utf-8") as f:
+        lineas = f.readlines()
+
+     suma = 0
+
+     for linea in lineas:
+        # Separa la línea por tabulaciones
+        columnas = linea.strip().split("\t")
+        # Convierte la segunda columna a entero y acumula
+        suma += int(columnas[1])
+
+     return suma
+
+     """
     Retorne la suma de la segunda columna.
 
     Rta/
     214
 
     """
+ 

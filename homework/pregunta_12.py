@@ -13,5 +13,25 @@ def pregunta_12():
 
     Rta/
     {'A': 177, 'B': 187, 'C': 114, 'D': 136, 'E': 324}
-
     """
+    with open("files/input/data.csv", "r", encoding="utf-8") as f:
+        lineas = f.readlines()
+
+    suma_por_letra = {}
+
+    for linea in lineas:
+        columnas = linea.strip().split("\t")
+        # La columna 1 contiene la letra
+        letra = columnas[0]
+        # La columna 5 contiene pares "clave:valor" separados por coma
+        pares = columnas[4].split(",")
+        suma_valores = 0
+        for par in pares:
+            _, valor = par.split(":")
+            suma_valores += int(valor)
+        if letra not in suma_por_letra:
+            suma_por_letra[letra] = 0
+        suma_por_letra[letra] += suma_valores
+
+    return suma_por_letra
+
